@@ -4,8 +4,12 @@ import { ReactComponent as CelestialLogo } from "../../assets/Logo.svg";
 import "./Navigation.styles.scss";
 import { UserContext } from "../../contexts/UserContext";
 import { signOutUser } from "../../utils/firebase/Firebase";
+import CartIcon from "../../components/cartIcon/CartIcon";
+import CartDropdown from "../../components/cartDropdown/CartDropdown";
+import { CartContext } from "../../contexts/CartContext";
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
@@ -26,7 +30,9 @@ const Navigation = () => {
               Sign In
             </Link>
           )}
+          <CartIcon />
         </div>
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>
