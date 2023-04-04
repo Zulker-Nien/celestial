@@ -22,18 +22,20 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const response = await signInWithGooglePopup();
-    if (response) {
-      const { user } = response;
-      await createUserDocumentFromAuth(user);
-    }
+    await signInWithGooglePopup();
   };
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     try {
-      await signInAuthUserWithEmailAndPassword(email, password);
+      const response = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      if (response) {
+        const { user } = response;
+      }
       resetFormFields();
     } catch (error: unknown) {
       switch ((error as FirebaseError).code) {
