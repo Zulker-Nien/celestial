@@ -5,14 +5,14 @@ const BUTTON_TYPE_CLASSES = {
   inverted: "inverted",
   default: "",
 };
-type ButtonType = "google" | "inverted" | "default";
-
-interface IButtons {
+interface ButtonProps {
   children: any;
-  buttonType: ButtonType;
-  type: "submit" | undefined;
+  buttonType: "google" | "inverted" | "default";
+  onClick?: any;
+  type?: "submit" | "button" | undefined;
 }
-const Button = ({ children, buttonType, ...otherProps }: IButtons) => {
+
+const Button = ({ children, buttonType, ...otherProps }: ButtonProps) => {
   return (
     <button
       className={`buttonContainer ${BUTTON_TYPE_CLASSES[buttonType]}`}
