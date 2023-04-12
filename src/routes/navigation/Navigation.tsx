@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { ReactComponent as CelestialLogo } from "../../assets/Logo.svg";
 import {
   NavigationContainer,
@@ -7,14 +6,22 @@ import {
   NavLinks,
   NavLink,
 } from "./Navigation.styles";
-import { UserContext } from "../../contexts/UserContext";
-import { signOutUser } from "../../utils/firebase/Firebase";
+
+import { selectIsCartOpen } from "../../store/cart/CartSelector";
+
+import { useSelector, useDispatch } from "react-redux";
+import { selectCurrentUser } from "../../store/user/UserSelector";
+import { signOutStart } from "../../store/user/UserAction";
+
 import CartIcon from "../../components/cartIcon/CartIcon";
 import CartDropdown from "../../components/cartDropdown/CartDropdown";
-import { CartContext } from "../../contexts/CartContext";
+
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
-  const { isCartOpen } = useContext(CartContext);
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+  const isCartOpen = useSelector(selectIsCartOpen);
+
+  const signOutUser = () => dispatch(signOutStart());
 
   return (
     <>
