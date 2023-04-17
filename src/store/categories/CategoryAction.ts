@@ -1,17 +1,42 @@
-import { useDispatch } from "react-redux";
-import { getCategoriesAndDocuments } from "../../utils/firebase/Firebase";
-import { createAction } from "../../utils/reducer/Reducer";
-import { CATEGORIES_ACTION_TYPES } from "./CategoryTypes";
+import { CATEGORIES_ACTION_TYPES, Category } from "./CategoryTypes";
 
-export const fetchCategoriesStart = () => {
-  return createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START, null);
-};
-export const fetchCategoriesSuccess = (categoriesArray: any) => {
-  return createAction(
-    CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
-    categoriesArray
-  );
-};
-export const fetchCategoriesFailed = (error: any) => {
-  return createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
-};
+import {
+  createAction,
+  Action,
+  ActionWithPayload,
+  withMatcher,
+} from "../../utils/reducer/Reducer";
+
+export type FetchCategoriesStart =
+  Action<CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START>;
+
+export type FetchCategoriesSuccess = ActionWithPayload<
+  CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
+  Category[]
+>;
+
+export type FetchCategoriesFailed = ActionWithPayload<
+  CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
+  Error
+>;
+
+export type CategoryAction =
+  | FetchCategoriesStart
+  | FetchCategoriesSuccess
+  | FetchCategoriesFailed;
+
+export const fetchCategoriesStart = withMatcher(
+  (): FetchCategoriesStart =>
+    createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START)
+);
+export const fetchCategoriesSuccess = withMatcher(
+  (categoriesArray: Category[]): FetchCategoriesSuccess =>
+    createAction(
+      CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
+      categoriesArray
+    )
+);
+export const fetchCategoriesFailed = withMatcher(
+  (error: Error): FetchCategoriesFailed =>
+    createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error)
+);
