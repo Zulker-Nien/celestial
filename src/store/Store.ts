@@ -33,10 +33,10 @@ const persistedReducer = persistReducer(persistConfig, RootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
-// const middleWare = [logger, sagaMiddleware].filter(Boolean);
-const middleWare = [process.env.NODE_ENV !== "production" && logger].filter(
-  (middleware): middleware is Middleware => Boolean(middleWare)
-);
+const middleWare = [logger, sagaMiddleware].filter(Boolean);
+// const middleWare = [process.env.NODE_ENV !== "production" && logger].filter(
+//   (middleware): middleware is Middleware => Boolean(middleWare)
+// );
 const composeEnhancer =
   (process.env.NODE_ENV !== "production" &&
     window &&

@@ -2,7 +2,6 @@ import { CategoryItem } from "../categories/CategoryTypes";
 import {
   createAction,
   withMatcher,
-  Action,
   ActionWithPayload,
 } from "../../utils/reducer/Reducer";
 import { CART_ACTION_TYPES, CartItem } from "./CartTypes";
@@ -11,6 +10,14 @@ const addCartItem = (
   cartItems: CartItem[],
   productToAdd: CategoryItem
 ): CartItem[] => {
+  if (!Array.isArray(cartItems)) {
+    return cartItems;
+  }
+
+  if (!productToAdd || !productToAdd.id) {
+    return cartItems;
+  }
+
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
   );
@@ -25,9 +32,17 @@ const addCartItem = (
 };
 
 const removeCardItem = (
-  cartItems: CartItem[],
+  cartItems: CartItem[] = [],
   cartItemToRemove: CartItem
 ): CartItem[] => {
+  if (!cartItems.length) {
+    console.log("Error: cart is empty");
+    return cartItems;
+  }
+  if (!cartItemToRemove.id) {
+    console.log("Error: invalid cart item to remove");
+    return cartItems;
+  }
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToRemove.id
   );
@@ -43,9 +58,13 @@ const removeCardItem = (
 
 const clearCartItem = (
   cartItems: CartItem[],
-  cartItemToClear: CartItem
-): CartItem[] =>
-  cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+  cartItemToClear?: CartItem
+): CartItem[] => {
+  if (!cartItemToClear) {
+    return cartItems;
+  }
+  return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+};
 
 export type SetIsCartOpen = ActionWithPayload<
   CART_ACTION_TYPES.SET_IS_CART_OPEN,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { FirebaseError } from "firebase/app";
 import FormInput from "../formInput/FormInput";
@@ -23,14 +23,14 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    dispatch<any>(googleSignInStart());
+    dispatch(googleSignInStart());
   };
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      dispatch<any>(emailSignInStart(email, password));
+      dispatch(emailSignInStart(email, password));
       // if (response) {
       //   const { user } = response;
       // }
@@ -50,7 +50,7 @@ const SignInForm = () => {
       console.error("User creation encountered an error", error);
     }
   };
-  const handleChange = (event: any) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };

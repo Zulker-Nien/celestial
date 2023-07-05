@@ -6,7 +6,7 @@ import {
 } from "./DirectoryItem.styles";
 
 type Category = {
-  imageUrl: any;
+  imageUrl: string;
   title: string;
   route: string;
 };

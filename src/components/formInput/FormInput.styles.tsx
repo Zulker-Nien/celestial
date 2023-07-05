@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-interface FormInputLabelProps {
-  shrink: any;
-}
+type FormInputLabelProps = {
+  shrink?: boolean;
+};
 
 const subColor = "grey";
 const mainColor = "black";
