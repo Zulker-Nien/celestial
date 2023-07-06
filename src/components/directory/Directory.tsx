@@ -4,19 +4,23 @@ const categories = [
   {
     id: 1,
     title: "Soaps",
-    imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
+    imageUrl:
+      "https://drive.google.com/uc?export=view&id=1BlBnSx98npo1aGCKe9PSaxyIYTHg1loC",
     route: "shop/soaps",
   },
+
   {
     id: 2,
     title: "Candles",
-    imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
+    imageUrl:
+      "https://drive.google.com/uc?export=view&id=1i1cvNTgKjyJMhHxIyyo2s52dGVyMq3BO",
     route: "shop/candles",
   },
   {
     id: 3,
     title: "Pomades",
-    imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
+    imageUrl:
+      "https://drive.google.com/uc?export=view&id=1zFvaF1yyyNg2WWJQk0wHrWWjd3q-Wado",
     route: "shop/pomade",
   },
 ];
